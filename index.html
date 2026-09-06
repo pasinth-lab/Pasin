@@ -17,39 +17,65 @@
         header { 
             background-color: #2c3e50; 
             color: #ffffff; 
-            padding: 3rem 0; 
+            padding: 2.5rem 0 1.5rem 0; 
             text-align: center; 
         }
+        header h1 { margin: 0; font-size: 2.2rem; }
+        header p { margin: 5px 0; color: #ecf0f1; }
+        
         .container { 
-            width: 80%; 
+            width: 85%; 
             max-width: 900px; 
             margin: 20px auto; 
         }
-        .section { 
+
+        /* ----- ส่วนการแต่งแถบกดเปลี่ยน Tab ----- */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            background-color: #e0e6ed;
+            padding: 5px;
+            border-radius: 8px 8px 0 0;
+        }
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 15px;
+            border: none;
+            background-color: transparent;
+            color: #333;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            background-color: #d0d7de;
+        }
+        .tab-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* ----- ส่วนเนื้อหาภายใน Tab ----- */
+        .tab-content {
+            display: none; /* ซ่อนแท็บทั้งหมดเป็นค่าเริ่มต้น */
             background: #ffffff; 
-            padding: 20px; 
-            margin-bottom: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-            border-left: 5px solid #3498db;
+            padding: 25px; 
+            border-radius: 0 0 8px 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .tab-content.active {
+            display: block; /* แสดงเฉพาะแท็บที่มีคลาส active */
+        }
+
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 0; }
         ul { padding-left: 20px; }
-        
-        /* ตกแต่งปุ่ม */
-        .btn { 
-            background-color: #3498db; 
-            color: white; 
-            border: none; 
-            padding: 10px 15px; 
-            cursor: pointer; 
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        .btn:hover { background-color: #2980b9; }
-        
-        /* ซ่อนเนื้อหาบางส่วนไว้ก่อนสำหรับ JS */
-        #hidden-projects { display: none; margin-top: 15px; }
+        li { margin-bottom: 10px; }
+        .school-item, .project-item { margin-bottom: 20px; }
+        .tag { background: #eef2f7; color: #2980b9; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -62,52 +88,102 @@
 
     <div class="container">
         
-        <div class="section">
-            <h2>Objective</h2>
-            <p>Motivated 3rd-year Chemical Engineering student seeking to join KAMP Engineering 6 as a Mentee. Eager to gain industry insights, refine practical engineering skills, and receive professional guidance from Kasetsart Engineering alumni.</p>
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'about')">About</button>
+            <button class="tab-btn" onclick="openTab(event, 'education')">Education</button>
+            <button class="tab-btn" onclick="openTab(event, 'skills')">Skills</button>
+            <button class="tab-btn" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tab-btn" onclick="openTab(event, 'activities')">Activities</button>
         </div>
 
-        <div class="section">
+        <div id="about" class="tab-content active">
+            <h2>Objective</h2>
+            <p>Motivated 3rd-year Chemical Engineering student seeking to join KAMP Engineering 6 as a Mentee. Eager to gain industry insights, refine practical engineering skills, and receive professional guidance from Kasetsart Engineering alumni. Aspiring to build a strong foundation for a career as a Process Engineer, with a long-term vision of advancing into engineering management.</p>
+        </div>
+
+        <div id="education" class="tab-content">
+            <h2>Education</h2>
+            <div class="school-item">
+                <h3>Kasetsart University</h3>
+                <p><strong>Bachelor of Engineering in Chemical Engineering</strong></p>
+                <p>GPAX: 3.73 / 4.00 | Expected Graduation: March 2027</p>
+            </div>
+            <hr>
+            <div class="school-item">
+                <h3>Rayongwittayakom School</h3>
+                <p><strong>Pre-Engineering Program</strong></p>
+                <p>GPAX: 3.78 / 4.00 | Graduated: 2024</p>
+            </div>
+        </div>
+
+        <div id="skills" class="tab-content">
             <h2>Technical & Soft Skills</h2>
             <ul>
-                <li><strong>Engineering & Simulation:</strong> UniSim Design, Aspen Plus, AutoCAD</li>
+                <li><strong>Engineering & Simulation:</strong> Unisim Design (Honeywell), Aspen Plus, AutoCAD</li>
                 <li><strong>Programming & Data:</strong> Python, MATLAB, Microsoft Excel</li>
-                <li><strong>Soft Skills:</strong> Analytical Thinking, Problem-Solving, Teamwork</li>
+                <li><strong>Soft Skills:</strong> Analytical Thinking, Complex Problem-Solving, Adaptability, Teamwork, Leadership</li>
+                <li><strong>Languages:</strong> Thai (Native), English (Intermediate), Chinese (Basic)</li>
             </ul>
         </div>
 
-        <div class="section">
+        <div id="projects" class="tab-content">
             <h2>Personal Projects</h2>
+            
+            <div class="project-item">
+                <h3>Design and Optimization of a 50,000 TPY Green Methanol Synthesis Plant <span class="tag">UniSim Design</span></h3>
+                <p>Simulated a continuous green methanol production facility utilizing LHHW kinetic models for CO2 hydrogenation. Integrated a Feed-Effluent Heat Exchanger (FEHE) and performed multi-variable sensitivity analyses and Techno-Economic Analysis (TEA) to optimize plant efficiency.</p>
+            </div>
+
+            <div class="project-item">
+                <h3>Oil Price Structure & Gross Refinery Margin (GRM) Modeling</h3>
+                <p>Modeled Ex-Refinery prices, Adjusted GRM, and Retail Marketing Margins (Feb - Jul 2026) to analyze supply chain impacts. Evaluated key factors including freight costs, risk premiums, and the financial exposure of refineries.</p>
+            </div>
+
+            <div class="project-item">
+                <h3>Two-Pipe Series Pressure Drop Analysis <span class="tag">MATLAB</span></h3>
+                <p>Developed a MATLAB live script with an interactive GUI using the Extended Bernoulli equation to analyze pressure drops in series piping systems. Visualized pressure loss factors to assist in fluid flow analysis and pump sizing.</p>
+            </div>
+
+            <div class="project-item">
+                <h3>Refinery Adaptation Strategy Analysis</h3>
+                <p>Analyzed industry challenges—including feedstock shifts, EV transition, and regional overcapacity—to outline strategic adaptation guidelines for refineries based on PTT Prism 2026 Outlook.</p>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <h2>Extracurricular Activities</h2>
             <ul>
-                <li><strong>Green Methanol Synthesis Plant:</strong> Simulated a continuous facility utilizing LHHW kinetic models and performed TEA via UniSim Design.</li>
-                <li><strong>Oil Price Structure & GRM Modeling:</strong> Analyzed supply chain impacts and financial exposure of refineries.</li>
+                <li><strong>Staff, New Gen Camp (Kasetsart University):</strong> Coordinated industrial field trips for first-year Chemical Engineering students to major facilities (Thai Polyethylene, Envico, Rayong Gas Separation Plant).</li>
+                <li><strong>Staff, KGE Camp (Kasetsart University):</strong> Organized educational activities to introduce high school students to Chemical Engineering.</li>
+                <li><strong>Saxophonist, Marching Band (Rayongwittayakom School):</strong> Competed in the Wind Ensemble category at the 69th National Student Arts and Crafts Competition.</li>
             </ul>
-            
-            <button class="btn" onclick="toggleProjects()">View More Projects</button>
-            
-            <ul id="hidden-projects">
-                <li><strong>Two-Pipe Series Pressure Drop Analysis:</strong> Developed an interactive MATLAB GUI using the Extended Bernoulli equation.</li>
-                <li><strong>Refinery Adaptation Strategy Analysis:</strong> Evaluated feedstock shifts and EV transition impacts based on PTT Prism 2026 Outlook.</li>
-            </ul>
+            <h2>Interests</h2>
+            <p>Musical Instruments (Saxophone, Piano), Film, Music</p>
         </div>
 
     </div>
 
     <script>
-        function toggleProjects() {
-            // สั่งให้หา Element ที่ชื่อ hidden-projects
-            var extraProjects = document.getElementById("hidden-projects");
-            var button = document.querySelector(".btn");
-
-            // เขียนเงื่อนไข (Logic) แบบเดียวกับที่ใช้ใน Python หรือ MATLAB
-            if (extraProjects.style.display === "none" || extraProjects.style.display === "") {
-                extraProjects.style.display = "block"; // แสดงข้อความ
-                button.innerHTML = "Hide Projects"; // เปลี่ยนข้อความบนปุ่ม
-            } else {
-                extraProjects.style.display = "none"; // ซ่อนข้อความ
-                button.innerHTML = "View More Projects"; // เปลี่ยนข้อความบนปุ่มกลับ
+        function openTab(evt, tabName) {
+            // 1. ซ่อนเนื้อหาของแท็บทั้งหมด
+            var tabContent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+                tabContent[i].classList.remove("active");
             }
+
+            // 2. ลบสถานะ 'active' ออกจากปุ่มกดทั้งหมด
+            var tabBtn = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tabBtn.length; i++) {
+                tabBtn[i].classList.remove("active");
+            }
+
+            // 3. แสดงเนื้อหาของแท็บที่เลือก และเปลี่ยนปุ่มที่กดให้เป็น 'active'
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
     </script>
+
 </body>
 </html>
